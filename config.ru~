@@ -1,5 +1,6 @@
-equire "bundler/setup"
+require "bundler/setup"
 require "yaml"
+require "thin"
 require "faye"
 require "private_pub"
 
