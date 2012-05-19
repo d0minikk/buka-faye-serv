@@ -1,10 +1,27 @@
+require 'rubygems'
+require 'bundler'
 require "bundler/setup"
+Bundler.require
 require "yaml"
 require "thin"
 require "faye"
-require "private_pub"
+
+require File.expand_path('../config/initializers/faye_token.rb', __FILE__)
 
 Faye::WebSocket.load_adapter('thin')
 
-PrivatePub.load_config(File.expand_path("../config/private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
-run PrivatePub.faye_app
+
+class ServerAuth
+  def incoming(message, callback)
+    if message['channel'] !~ %r{^/meta/}
+      if message['ext']['auth_token'] != FAYE_TOKEN
+        message['error'] = 'Invalid authentication token'
+      end
+    end
+    callback.call(message)
+  end
+end
+
+faye_server = Faye::RackAdapter.new(:mount => '/faye', :timeout => 45)
+faye_server.add_extension(ServerAuth.new)
+run faye_server
