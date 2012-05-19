@@ -1,0 +1,6 @@
+production:
+  secret_token: "87705d2dd93d792daf0782428ef1144f3e9c7bff493121305474a2dd34c309b0"
+  signature_expiration: 3600 # one hour
+development:
+  server: "/faye"
+  secret_token: "secret"
