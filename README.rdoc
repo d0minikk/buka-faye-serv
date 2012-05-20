@@ -1,0 +1,9 @@
+#about
+private_pub faye server for heroku
+
+
+http://faye.jcoglan.com/
+
+https://github.com/ryanb/private_pub
+
+
