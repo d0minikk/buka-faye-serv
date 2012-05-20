@@ -1,1 +1,1 @@
-web: bundle exec thin -p 80 -e $RACK_ENV -R config.ru start
+web: rackup config.ru -s thin -E production
