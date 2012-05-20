@@ -6,5 +6,5 @@ test:
   secret_token: "buka"
 production:
   sserver: "http://pure-leaf-8518.herokuapp.com/faye"
-  secret_token: "<%= defined?(SecureRandom) ? SecureRandom.hex(32) : ActiveSupport::SecureRandom.hex(32) %>"
+  secret_token: "buka"
   signature_expiration: 3600 # one hour
